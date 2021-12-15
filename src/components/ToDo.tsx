@@ -10,9 +10,16 @@ function ToDo({ text, id, category }: IToDo) {
     } = event;
     setToDos((oldToDos) => {
       const targetIndex = oldToDos.findIndex((todo) => todo.id === id);
-      const newToDo = { text, id, category: name };
-      console.log(targetIndex, newToDo);
-      return oldToDos;
+      /* categery에는 name이 없기에 as any로 typescript 에게 이거는 신경쓰지말라고 알려줌
+      하지만 이거는 별로 좋은 방법이 아님 
+      onclick 함수에 parameter를 넣어서 <button onClick={() => onclick(value)}></button>
+      으로 사용 하는 걸 선호 함 */
+      const newToDo = { text, id, category: name as any };
+      return [
+        ...oldToDos.slice(0, targetIndex),
+        newToDo,
+        ...oldToDos.slice(targetIndex + 1),
+      ];
     });
   };
   return (
