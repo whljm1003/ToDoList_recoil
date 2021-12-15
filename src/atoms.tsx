@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil";
 
 /*
-	enum은 개발자를 도와주는 녀석임
+	enum은 계속해서 저장해야 하는 값을 저장할 수 있는 도구임
 	enum의 type은 숫자 0,1,2 임 
 	그래서 "TO_DO" = "TO_DO" 로 타입 설정 해줌
  */
@@ -21,9 +21,10 @@ export const categoryState = atom<Categories>({
   default: Categories.TO_DO,
 });
 
+const localStorageToDos = JSON.parse(localStorage.getItem("ToDos") || "{}");
 export const toDoState = atom<IToDo[]>({
   key: "toDo",
-  default: [],
+  default: localStorageToDos?.length > 0 ? localStorageToDos : [],
 });
 
 export const toDoSelector = selector({

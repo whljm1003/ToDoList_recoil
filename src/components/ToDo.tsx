@@ -22,8 +22,24 @@ function ToDo({ text, id, category }: IToDo) {
       ];
     });
   };
+
+  const DeleteToDo = (event: React.FormEvent<HTMLButtonElement>) => {
+    const {
+      currentTarget: { parentElement },
+    } = event;
+
+    setToDos((oldToDos) => {
+      const newTodoArray = oldToDos.filter(
+        (todo) => todo.id !== Number(parentElement?.id)
+      );
+      const stringifiedNewToDos = JSON.stringify(newTodoArray);
+      localStorage.setItem("ToDos", stringifiedNewToDos);
+      return newTodoArray;
+    });
+  };
+
   return (
-    <li>
+    <li id={id as any}>
       <span>{text}</span>
       {category !== Categories.DOING && (
         <button name={Categories.DOING} onClick={onclick}>
@@ -40,6 +56,7 @@ function ToDo({ text, id, category }: IToDo) {
           Done
         </button>
       )}
+      <button onClick={DeleteToDo}>DELETE</button>
     </li>
   );
 }
