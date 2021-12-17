@@ -1,8 +1,9 @@
-# React Masterclass_ToDo
+# To Do List
 
-### Using:
+### Using
 
+- React
 - Typescript
-- Styled Components
-- React Hook Form
 - recoil
+- React Hook Form
+- Styled Components
