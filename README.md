@@ -4,6 +4,6 @@
 
 - React
 - Typescript
-- recoil
+- Recoil
 - React Hook Form
 - Styled Components
